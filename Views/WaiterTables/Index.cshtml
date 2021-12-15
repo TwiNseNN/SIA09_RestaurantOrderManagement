@@ -1,0 +1,41 @@
+﻿
+@model RestaurantManagementOrder.Models.WaiterTables.Index;
+@{
+    ViewData["Title"] = "Tables";
+    var tableCount = RestaurantManagementOrder.Services.Constants.TableCount;
+}
+
+<h1>Tables</h1>
+
+@{ int table = 1; }
+@while (true)
+{
+    <div class="row my-3">
+        @for (int j = 0; j < 4; j++)
+        {
+            var order = Model.TableOrders[table - 1];
+            <div class="col-3">
+                <div class="card border-@(order != null ? "danger" : "success")">
+                    <div class="card-header text-@(order != null ? "danger" : "success")">
+                        <h4 class="card-title">
+                            Table @table
+                        </h4>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary stretched-link" asp-action="Table" asp-route-id="@table">
+                            @(order != null ? "Edit order" : "Take new order")
+                        </a>
+                    </div>
+                </div>
+            </div>
+            table++;
+            if (table > tableCount)
+                break;
+        }
+    </div>
+    if (table > tableCount)
+        break;
+}
