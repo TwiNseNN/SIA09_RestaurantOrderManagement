@@ -18,7 +18,11 @@ namespace RestaurantManagementOrder.Models
         public List<OrderItem> OrderItems { get; set; }
 
         [NotMapped]
-        public int Total { get => OrderItems.Sum(oi => oi.MenuItem.Price * oi.Quantity); }
+        public int Total {
+            get => OrderItems
+                .Where(oi => !oi.IsReverted)
+                .Sum(oi => oi.MenuItem.Price * oi.Quantity);
+        }
     }
 
     public enum OrderPaymentMethod

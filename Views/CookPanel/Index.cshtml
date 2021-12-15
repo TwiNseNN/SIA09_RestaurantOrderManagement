@@ -1,0 +1,21 @@
+﻿@model List<OrderItem>;
+@{
+    ViewData["Title"] = "Cook list";
+}
+
+<h1>Cook list</h1>
+@foreach (var orderItem in Model)
+{
+    <div class="card mb-2 @(orderItem.IsReverted ? "text-white bg-danger" : "")">
+        <div class="card-header">
+            Table @orderItem.Order.TableNumber
+            <span class="badge float-right badge-@(orderItem.Status == OrderItemStatus.NotReady ? "danger" : "warning")">
+                @Enum.GetName(typeof(OrderItemStatus), orderItem.Status)
+            </span>
+        </div>
+        <div class="card-body">
+            @(orderItem.Quantity)x
+            @(orderItem.MenuItem.Name)
+        </div>
+    </div>
+}

@@ -1,0 +1,59 @@
+﻿@model RestaurantManagementOrder.Models.WaiterTables.AddOrderItem;
+@{
+    ViewData["Title"] = "Add Order Item";
+}
+
+<h1>Add order item</h1>
+<form method="POST">
+    <h2>Quantity</h2>
+    <div class="form-group">
+        <input type="number" class="form-control d-inline" name="quantity" value="1" style="width: 100px" />
+        <button type="button" class="btn btn-sm btn-primary d-inline js-plus">+</button>
+        <button type="button" class="btn btn-sm btn-primary d-inline js-minus">-</button>
+    </div>
+
+    <h2>Menu items</h2>
+    @foreach (var pair in Model.MenuItems.ToList())
+    {
+        <h3>@Model.BeautifyCategory(pair.Key)</h3>
+        var index = 0;
+        @while (true)
+        {
+            if (index >= pair.Value.Count)
+                break;
+            <div class="row mb-3">
+                @for (int i = 0; i < 3; i++)
+                {
+                    if (index >= pair.Value.Count)
+                        break;
+                    var menuItem = pair.Value[index];
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                @menuItem.Name
+                            </div>
+                            <div class="card-footer">
+                                @(menuItem.Price / 100.0) lei
+                                <button name="menuItemId" value="@menuItem.MenuItemId" class="btn btn-sm btn-primary float-right">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    index++;
+                }
+            </div>
+        }
+    }
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(".js-plus").click(function () {
+            var $input = $("form [name='quantity']");
+            $input.val(parseInt($input.val()) + 1);
+        });
+        $(".js-minus").click(function () {
+            var $input = $("form [name='quantity']");
+            $input.val($input.val() - 1);
+        });
+    </script>
+}

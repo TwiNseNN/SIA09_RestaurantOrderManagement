@@ -168,7 +168,9 @@ C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\MenuItemsAdmin\Details.cshtml.g.cs
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\MenuItemsAdmin\Edit.cshtml.g.cs
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\MenuItemsAdmin\Index.cshtml.g.cs
-C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterTables\Index.cshtml.g.cs
-C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterTables\Table.cshtml.g.cs
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\bin\Debug\net5.0\Castle.Core.dll
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterPanel\AddOrderItem.cshtml.g.cs
+C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterPanel\Index.cshtml.g.cs
+C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterPanel\Table.cshtml.g.cs
+C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\CookPanel\Index.cshtml.g.cs

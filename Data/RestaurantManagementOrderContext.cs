@@ -20,11 +20,6 @@ namespace RestaurantManagementOrder.Data
                 .HasKey(oi => new { oi.MenuItemId, oi.OrderId });
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //    => optionsBuilder
-        //        .UseLazyLoadingProxies()
-        //        .UseSqlServer(myConnectionString);
-
         public DbSet<Admin> Admin { get; set; }
         public DbSet<Cook> Cook { get; set; }
         public DbSet<MenuItem> MenuItem { get; set; }
