@@ -16,6 +16,26 @@
         <div class="card-body">
             @(orderItem.Quantity)x
             @(orderItem.MenuItem.Name)
+            <div class="float-right">
+                <form asp-action="SetStatus" method="post">
+                    <input type="hidden" name="compoundId" value="@orderItem.OrderId-@orderItem.MenuItemId" />
+                    <input type="hidden" name="newStatus" value="@(orderItem.Status == OrderItemStatus.NotReady ? "Preparing" : "ReadyToServe")" />
+                    <button class="btn btn-outline-@(orderItem.Status == OrderItemStatus.NotReady ? "primary" : "success")">
+                        @(orderItem.Status == OrderItemStatus.NotReady ? "Take item" : "Mark as completed")
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                window.location = window.location;
+            }, 2500);
+        });
+    </script>
 }

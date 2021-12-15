@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantManagementOrder.Models;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagementOrder.Controllers
 {
+    [Authorize(Policy = "Waiter")]
     public class WaiterPanelController : Controller
     {
         protected Data.RestaurantManagementOrderContext _context;
@@ -70,15 +72,21 @@ namespace RestaurantManagementOrder.Controllers
         {
             var order = _context.Order
                 .Include(o => o.OrderItems)
-                .First(o => o.TableNumber == tableNumber);
-            order.OrderItems.Add(new OrderItem()
+                .First(o => o.TableNumber == tableNumber && !o.IsPaid);
+            var orderItem = order.OrderItems.FirstOrDefault(oi => oi.MenuItemId == menuItemId && oi.OrderId == order.OrderId);
+            if (orderItem == null)
             {
-                IsReverted = false,
-                MenuItemId = menuItemId,
-                OrderId = order.OrderId,
-                Quantity = quantity,
-                Status = OrderItemStatus.NotReady
-            });
+                orderItem = new OrderItem()
+                {
+                    IsReverted = false,
+                    MenuItemId = menuItemId,
+                    OrderId = order.OrderId,
+                    Quantity = 0,
+                    Status = OrderItemStatus.NotReady
+                };
+                order.OrderItems.Add(orderItem);
+            }
+            orderItem.Quantity += quantity;
             _context.SaveChanges();
             return RedirectToAction(nameof(Table), new { id = tableNumber });
         }
@@ -93,6 +101,31 @@ namespace RestaurantManagementOrder.Controllers
             orderItem.IsReverted = !orderItem.IsReverted;
             _context.SaveChanges();
             return RedirectToAction(nameof(Table), new { id = returnToTable });
+        }
+
+        [HttpPost]
+        public IActionResult MarkAsServed([Bind(Prefix = "id")] string compoundId, int returnToTable)
+        {
+            var parts = compoundId.Split('-');
+            var orderId = Convert.ToInt32(parts[0]);
+            var menuItemId = Convert.ToInt32(parts[1]);
+            var orderItem = _context.OrderItem
+                .First(oi => oi.OrderId == orderId && oi.MenuItemId == menuItemId);
+
+            if (orderItem.Status == OrderItemStatus.ReadyToServe)
+                orderItem.Status = OrderItemStatus.Served;
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Table), new { id = returnToTable });
+        }
+
+        [HttpPost]
+        public IActionResult EndOrder(int orderId, string paymentMethod)
+        {
+            var order = _context.Order.Find(orderId);
+            order.PaymentMethod = Enum.Parse<OrderPaymentMethod>(paymentMethod);
+            order.IsPaid = true;
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

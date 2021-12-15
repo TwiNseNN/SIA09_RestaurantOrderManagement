@@ -10,7 +10,7 @@
 
 <a class="btn btn-primary mb-2" asp-action="AddOrderItem" asp-route-id="@Model.TableNumber">Add new Item</a>
 
-<table class="table">
+<table class="table mb-3">
     <thead>
         <tr>
             <th>Item Name</th>
@@ -30,14 +30,40 @@
                 @orderItem.MenuItem.Name
             </td>
             <td>
-                @Enum.GetName(typeof(OrderItemStatus), orderItem.Status)
+                @{ 
+                    var className = "";
+                    switch (orderItem.Status)
+                    {
+                        case OrderItemStatus.NotReady:
+                            className = "badge-danger"; break;
+                        case OrderItemStatus.Preparing:
+                            className = "badge-warning"; break;
+                        case OrderItemStatus.ReadyToServe:
+                            className = "badge-success"; break;
+                        case OrderItemStatus.Served:
+                            className = "badge-secondary"; break;
+                    }
+                }
+                <span class="badge @(className)">
+                    @Enum.GetName(typeof(OrderItemStatus), orderItem.Status)
+                </span>
             </td>
-            <td>@orderItem.MenuItem.Category</td>
+            <td>@orderItem.MenuItem.PrettifiedCategory</td>
             <td>
                 @(orderItem.MenuItem.Price * orderItem.Quantity / 100) lei
             </td>
             <td>@(orderItem.IsReverted ? "Yes" : "No")</td>
             <td>
+                @if (orderItem.Status == OrderItemStatus.ReadyToServe)
+                {
+                    <form asp-action="MarkAsServed" method="post">
+                        <input type="hidden" name="id" value="@orderItem.OrderId-@orderItem.MenuItemId" />
+                        <input type="hidden" name="returnToTable" value="@Model.TableNumber" />
+                        <button type="submit" class="btn btn-outline-success">
+                            Serve
+                        </button>
+                    </form>
+                }
                 <form asp-action="ToggleRevert" method="post">
                     <input type="hidden" name="id" value="@orderItem.OrderId-@orderItem.MenuItemId" />
                     <input type="hidden" name="returnToTable" value="@Model.TableNumber" />
@@ -54,3 +80,28 @@
         </tr>
     </tbody>
 </table>
+
+@if (Model.OrderItems.All(oi => oi.Status == OrderItemStatus.Served))
+{
+    <form asp-action="EndOrder" method="post">
+        <input type="hidden" name="orderId" value="@Model.OrderId" />
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Payment</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" value="Card" id="method_card" />
+                    <label class="form-check-label" for="method_card">Card 💳</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" value="Cash" id="method_cash" />
+                    <label class="form-check-label" for="method_cash">Cash 💵</label>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary">End order</button>
+            </div>
+        </div>
+    </form>
+}

@@ -15,7 +15,7 @@
     <h2>Menu items</h2>
     @foreach (var pair in Model.MenuItems.ToList())
     {
-        <h3>@Model.BeautifyCategory(pair.Key)</h3>
+        <h3>@pair.Value.First().PrettifiedCategory</h3>
         var index = 0;
         @while (true)
         {
