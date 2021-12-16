@@ -174,3 +174,4 @@ C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterPanel\Index.cshtml.g.cs
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\WaiterPanel\Table.cshtml.g.cs
 C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\CookPanel\Index.cshtml.g.cs
+C:\Users\TwiNseNN\source\repos\RestaurantManagementOrder\obj\Debug\net5.0\Razor\Views\Public\Menu.cshtml.g.cs

@@ -1,0 +1,26 @@
+﻿
+@model Dictionary<string, List<MenuItem>>;
+@{
+    ViewData["Title"] = RestaurantManagementOrder.Services.Constants.RestaurantName;
+    ViewData["HasNavbar"] = false;
+}
+
+<h1>Menu</h1>
+
+@RestaurantManagementOrder.Services.Constants.RestaurantName
+
+@foreach (var menuItems in Model.Values)
+{
+    <h2>@menuItems.First().PrettifiedCategory</h2>
+    <table class="table">
+        <tbody>
+            @foreach (var menuItem in menuItems)
+            {
+                <tr>
+                    <td>@menuItem.Name</td>
+                    <td>@(menuItem.Price / 100.0) lei</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} 

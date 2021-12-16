@@ -22,7 +22,27 @@
                         </h4>
                     </div>
                     <div class="card-body">
-
+                        @if (order != null)
+                        {
+                            @if (order.OrderItems.Any(oi => oi.Status == OrderItemStatus.ReadyToServe))
+                            {
+                                <h4 class="badge badge-success">Ready to Serve!</h4>
+                            }
+                            var lastTwo = order.OrderItems.TakeLast(2);
+                            @foreach (var featuredItem in lastTwo)
+                            {
+                                <div>
+                                    @(featuredItem.Quantity)x
+                                    @featuredItem.MenuItem.Name
+                                </div>
+                            }
+                            @if (order.OrderItems.Count >= 3)
+                            {
+                                <div>
+                                    ...
+                                </div>
+                            }
+                        }
                     </div>
                     <div class="card-footer">
                         <a class="btn btn-primary stretched-link" asp-action="Table" asp-route-id="@table">
@@ -38,4 +58,16 @@
     </div>
     if (table > tableCount)
         break;
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                window.location = window.location;
+            }, 2500);
+        });
+    </script>
 }
