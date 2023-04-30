@@ -5,9 +5,30 @@
     var tableCount = RestaurantManagementOrder.Services.Constants.TableCount;
 }
 
+<style>
+   .view-container {
+        height: 80vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .background-container {
+        height: 100%;
+        width: fit-content;
+        position: relative;
+    }
+    .background-container > img {
+        height: 100%;
+    }
+    .table {
+        position: absolute;
+        width: 100px;
+    }
+</style>
+
 <h1>Tables</h1>
 
-@{ int table = 1; }
+@{/*@{ int table = 1; }
 @while (true)
 {
     <div class="row my-3">
@@ -58,16 +79,38 @@
     </div>
     if (table > tableCount)
         break;
+}*/}
+
+@{
+    var tablePositions = new List<(float, float)>() {
+        (2f, 4.5f),
+        (2f, 18.5f),
+    };
 }
+
+<div class="view-container">
+    <div class="background-container">
+        <img src="https://www.cadpro.com/wp-content/uploads/2013/09/restaurant-3.jpg" />
+        @foreach (var (tablePos, idx) in tablePositions.Select((t, idx) => (t, idx)))
+        {
+            var order = Model.TableOrders[idx];
+            <div class="table card" style="top: @(tablePos.Item1)%; left:@(tablePos.Item2)%;">
+                <div class="card-body @(order != null ? "bg-success" : "")">
+                    Table @(idx + 1)
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        $(document).ready(function () {
-            setTimeout(function () {
-                window.location = window.location;
-            }, 2500);
-        });
+        //$(document).ready(function () {
+        //    setTimeout(function () {
+        //        window.location = window.location;
+        //    }, 2500);
+        //});
     </script>
 }

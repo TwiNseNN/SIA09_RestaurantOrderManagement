@@ -33,5 +33,13 @@ namespace RestaurantManagementOrder.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ToggleDarkMode()
+        {
+            var isDarkmode = Request.Cookies["IsDarkMode"] == "true";
+            Response.Cookies.Append("IsDarkMode", !isDarkmode ? "true" : "false");
+            var referrer = Request.Headers["Referer"].First() ?? "/";
+            return Redirect(referrer);
+        }
     }
 }

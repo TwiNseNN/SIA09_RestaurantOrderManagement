@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TwiNseNN\\source\\repos\\RestaurantManagementOrder\\RestaurantManagementOrder.csproj": {}
+    "C:\\Users\\TwiNseNN\\Documents\\GitHub\\SIA09_RestaurantOrderManagement\\RestaurantManagementOrder.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TwiNseNN\\source\\repos\\RestaurantManagementOrder\\RestaurantManagementOrder.csproj": {
+    "C:\\Users\\TwiNseNN\\Documents\\GitHub\\SIA09_RestaurantOrderManagement\\RestaurantManagementOrder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TwiNseNN\\source\\repos\\RestaurantManagementOrder\\RestaurantManagementOrder.csproj",
+        "projectUniqueName": "C:\\Users\\TwiNseNN\\Documents\\GitHub\\SIA09_RestaurantOrderManagement\\RestaurantManagementOrder.csproj",
         "projectName": "RestaurantManagementOrder",
-        "projectPath": "C:\\Users\\TwiNseNN\\source\\repos\\RestaurantManagementOrder\\RestaurantManagementOrder.csproj",
+        "projectPath": "C:\\Users\\TwiNseNN\\Documents\\GitHub\\SIA09_RestaurantOrderManagement\\RestaurantManagementOrder.csproj",
         "packagesPath": "C:\\Users\\TwiNseNN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TwiNseNN\\source\\repos\\RestaurantManagementOrder\\obj\\",
+        "outputPath": "C:\\Users\\TwiNseNN\\Documents\\GitHub\\SIA09_RestaurantOrderManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\TwiNseNN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -37,48 +37,52 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "BCrypt.Net-Next": {
               "target": "Package",
-              "version": "[4.0.2, )"
+              "version": "[4.0.3, )"
             },
             "JWT.Extensions.AspNetCore": {
               "target": "Package",
-              "version": "[7.3.3, )"
+              "version": "[10.1.1, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
-              "version": "[5.0.13, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[5.0.2, )"
+              "version": "[7.0.5, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[41.10.0, )"
             }
           },
           "imports": [
@@ -87,7 +91,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -99,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

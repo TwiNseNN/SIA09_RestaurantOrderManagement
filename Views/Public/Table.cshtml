@@ -1,0 +1,77 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Table";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger">
+        There is no order for this table yet. Ask the waiter!
+    </div>
+    return;
+}
+
+<h1>Table @Model.TableNumber</h1>
+
+@if (Context.Request.Query["error"] == "paymentCanceled")
+{
+    <div class="alert alert-danger">
+        Your payment was canceled. Please try again!
+    </div>
+}
+
+<p>@Model.OrderItems.Count items</p>
+
+<table class="table mb-3">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Status</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var orderItem in Model.OrderItems)
+        {
+            <tr>
+                <td>
+                    @(orderItem.Quantity)x
+                    @orderItem.MenuItem.Name
+                </td>
+                <td>
+                    @{
+                        var className = "";
+                        switch (orderItem.Status)
+                        {
+                            case OrderItemStatus.NotReady:
+                                className = "badge-danger"; break;
+                            case OrderItemStatus.Preparing:
+                                className = "badge-warning"; break;
+                            case OrderItemStatus.ReadyToServe:
+                                className = "badge-success"; break;
+                            case OrderItemStatus.Served:
+                                className = "badge-secondary"; break;
+                        }
+                    }
+                    <span class="badge @(className)">
+                        @Enum.GetName(typeof(OrderItemStatus), orderItem.Status)
+                    </span>
+                </td>
+                <td>
+                    @(orderItem.MenuItem.Price * orderItem.Quantity / 100.0) lei
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2">Total</td>
+            <td>@(Model.Total / 100.0) lei</td>
+        </tr>
+    </tbody>
+</table>
+
+@if (Model.OrderItems.Count != 0) {
+    <a class="btn btn-primary" asp-action="ProcessTablePayment" asp-route-id="@Model.OrderId">
+        Pay
+    </a>
+}

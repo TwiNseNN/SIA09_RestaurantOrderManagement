@@ -4,14 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RestaurantManagementOrder</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @if (Context.Request.Cookies.Contains(new KeyValuePair<string, string>("IsDarkMode", "true")))
+    {
+        <link rel="stylesheet" href="~/lib/bootswatch/slate/bootstrap.min.css" />
+    } else
+    {
+        <link rel="stylesheet" href="~/lib/bootswatch/flatly/bootstrap.min.css" />
+    }
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     @if (!(ViewData.ContainsKey("HasNavbar") && (bool)ViewData["HasNavbar"] == false))
     {
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@RestaurantManagementOrder.Services.Constants.RestaurantName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -57,6 +64,11 @@
                                 <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Login</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="ToggleDarkmode">
+                                <i class="bi-sun"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
