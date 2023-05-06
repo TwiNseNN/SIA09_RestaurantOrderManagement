@@ -35,6 +35,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="MenuItemsAdmin" asp-action="Index">All menu items</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Statistics" asp-action="Index">Statistics</a>
+                            </li>
                         }
                         @if (Context.User.Claims.Any(cl => cl.Type == "type" && cl.Value == "Waiter"))
                         {

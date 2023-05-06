@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Globalization;
+
 @model RestaurantManagementOrder.Models.WaiterTables.Index;
 @{
     ViewData["Title"] = "Tables";
@@ -23,6 +24,9 @@
     .table {
         position: absolute;
         width: 100px;
+        color: black;
+        background-color: #FFFB;
+        text-align: center;
     }
 </style>
 
@@ -84,7 +88,8 @@
 @{
     var tablePositions = new List<(float, float)>() {
         (2f, 4.5f),
-        (2f, 18.5f),
+        (2f, 19.5f),
+        (2f, 33.5f),
     };
 }
 
@@ -94,11 +99,11 @@
         @foreach (var (tablePos, idx) in tablePositions.Select((t, idx) => (t, idx)))
         {
             var order = Model.TableOrders[idx];
-            <div class="table card" style="top: @(tablePos.Item1)%; left:@(tablePos.Item2)%;">
+            <a asp-action="Table" asp-route-id="@(idx + 1)" class="table card" style="top: @(tablePos.Item1.ToString(CultureInfo.InvariantCulture))%; left:@(tablePos.Item2.ToString(CultureInfo.InvariantCulture))%;">
                 <div class="card-body @(order != null ? "bg-success" : "")">
                     Table @(idx + 1)
                 </div>
-            </div>
+            </a>
         }
     </div>
 </div>

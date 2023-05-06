@@ -1,0 +1,39 @@
+﻿@using RestaurantManagementOrder.Models.Statistics;
+@model StatisticsModel
+
+<h1>Statistics</h1>
+
+<h2>Biggest order by quantity</h2>
+
+Order items: @Model.BiggestOrderByQuantity.OrderItems.Count
+<br />
+Price: @(Model.BiggestOrderByQuantity.OrderItems.Sum(oi => oi.MenuItem.Price * oi.Quantity) / 100) lei
+
+<ul>
+    @foreach (var item in Model.BiggestOrderByQuantity.OrderItems)
+    {
+        <li>
+            @(item.Quantity)x @item.MenuItem.Name: @(item.MenuItem.Price * item.Quantity / 100) lei
+        </li>
+    }
+</ul>
+
+
+<h2>Biggest order by price</h2>
+
+Order items: @Model.BiggestOrderByPrice.OrderItems.Count
+<br />
+Price: @(Model.BiggestOrderByPrice.OrderItems.Sum(oi => oi.MenuItem.Price * oi.Quantity) / 100) lei
+
+<ul>
+    @foreach (var item in Model.BiggestOrderByPrice.OrderItems)
+    {
+        <li>
+            @(item.Quantity)x @item.MenuItem.Name: @(item.MenuItem.Price * item.Quantity / 100) lei
+        </li>
+    }
+</ul>
+
+<h2>Most expensive table</h2>
+
+The most expensive table is Table @(Model.MostExpensiveTable.TableNum) with a total price of @(Model.MostExpensiveTable.TotalPrice / 100) lei.
