@@ -8,6 +8,6 @@ namespace RestaurantManagementOrder.Services
     public static class Constants
     {
         public static readonly string RestaurantName = "Restaurant SRL";
-        public static readonly int TableCount = 8;
+        public static readonly int TableCount = 16;
     }
 }

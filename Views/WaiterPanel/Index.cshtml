@@ -11,7 +11,6 @@
         height: 80vh;
         width: 100%;
         display: flex;
-        justify-content: center;
     }
     .background-container {
         height: 100%;
@@ -20,13 +19,16 @@
     }
     .background-container > img {
         height: 100%;
+        width: 150%;
     }
     .table {
         position: absolute;
-        width: 100px;
+        width: 86px;
         color: black;
         background-color: #FFFB;
         text-align: center;
+        height: 50px;
+        font-size: 12px;
     }
 </style>
 
@@ -87,15 +89,28 @@
 
 @{
     var tablePositions = new List<(float, float)>() {
-        (2f, 4.5f),
-        (2f, 19.5f),
-        (2f, 33.5f),
+        (2.9f, 7.2f),
+        (2.9f, 32.9f),
+        (2.9f, 58.1f),
+        (2.9f, 82.6f),
+        (25.3f, 10.6f),
+        (25.3f, 33.4f),
+        (25.3f, 56.3f),
+        (25.3f, 79f),
+        (45.3f, 67.8f),
+        (45.3f, 90.6f),
+        (64.9f, 56.3f),
+        (64.9f, 87.1f),
+        (64.9f, 120f),
+        (85.7f, 56.3f),
+        (85.7f, 87.1f),
+        (85.7f, 120f),
     };
 }
 
 <div class="view-container">
     <div class="background-container">
-        <img src="https://www.cadpro.com/wp-content/uploads/2013/09/restaurant-3.jpg" />
+        <img src="https://i.ibb.co/XXSMrF4/Small-Restaurant-Seating-Plan-BUN.jpg" />
         @foreach (var (tablePos, idx) in tablePositions.Select((t, idx) => (t, idx)))
         {
             var order = Model.TableOrders[idx];
